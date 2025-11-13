@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sourish Dey — Cloud & Data Science Engineer</title>
+  <meta name="description" content="Sourish Dey — Cloud Engineer, Data Scientist, MLOps, AWS, Python, AI/ML | KIIT CSE'27" />
+  <meta name="author" content="Sourish Dey" />
+
+  <!-- Icons / Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="" crossorigin="anonymous"/>
+
+  <!-- Simple CSS Reset + Styles -->
+  <style>
+    /* ========= Base / Reset ========= */
+    :root{
+      --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#6b7280;
+      --primary:#6366f1; --accent:#10b981; --glass: rgba(255,255,255,0.55);
+      --radius:14px; --shadow: 0 10px 30px rgba(2,6,23,0.08); --ease:cubic-bezier(.2,.8,.2,1);
+    }
+    [data-theme="dark"]{
+      --bg:#071025; --card:#0f1724; --text:#e6eef8; --muted:#9ca3af;
+      --glass: rgba(15,23,36,0.6);
+      --primary:#8b9cff; --accent:#34d399;
+      --shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family:Inter, "Segoe UI", Roboto, system-ui, -apple-system; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; line-height:1.5; transition:background .35s var(--ease), color .35s var(--ease)}
+    a{color:var(--primary); text-decoration:none}
+    .container{width:94%; max-width:1180px; margin:0 auto; padding:0 12px}
+
+    /* ========= NAV ========= */
+    nav{position:fixed; top:0; left:0; right:0; z-index:999; backdrop-filter: blur(6px); background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.35)); box-shadow:var(--shadow)}
+    [data-theme="dark"] nav{ background: linear-gradient(180deg, rgba(7,16,37,0.6), rgba(15,23,36,0.35)); }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{font-weight:700; color:var(--primary); font-size:1.15rem}
+    .nav-links{display:flex; gap:14px; align-items:center}
+    .nav-links a{padding:8px 10px; border-radius:8px; font-weight:600; color:var(--text); opacity:.95}
+    .nav-links a:hover{background:var(--glass); transform:translateY(-2px)}
+    .btn-small{padding:8px 12px; border-radius:10px; background:var(--primary); color:white; font-weight:700; display:inline-flex; gap:8px; align-items:center}
+
+    /* mobile */
+    .hamburger{display:none; background:none; border:0; font-size:1.2rem}
+    @media (max-width:880px){
+      .nav-links{display:none; position:fixed; left:0; right:0; top:64px; background:var(--card); flex-direction:column; gap:0; padding:12px; box-shadow:var(--shadow)}
+      .nav-links a{padding:12px; border-bottom:1px solid rgba(0,0,0,0.04)}
+      .hamburger{display:block}
+    }
+
+    /* ========= HERO ========= */
+    header.hero{min-height:88vh; display:flex; align-items:center; padding-top:92px; position:relative; overflow:hidden}
+    .hero-inner{display:grid; grid-template-columns:1fr 420px; gap:32px; align-items:center; width:100%; margin:0 auto}
+    .hero-title{font-size:clamp(2rem,4vw,3.2rem); font-weight:800; line-height:1.02; background:linear-gradient(90deg,var(--primary),var(--accent)); -webkit-background-clip:text; color:transparent}
+    .typewriter{font-weight:700; color:var(--primary); margin-top:8px; min-height:34px}
+    .hero-p{color:var(--muted); margin-top:18px; max-width:60ch}
+    .hero-cta{margin-top:20px; display:flex; gap:12px; flex-wrap:wrap}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); padding:22px; border-radius:18px; box-shadow:var(--shadow)}
+    [data-theme="dark"] .hero-card{background: linear-gradient(180deg, rgba(15,23,36,0.6), rgba(15,23,36,0.4));}
+
+    .avatar-wrap{display:flex; align-items:center; justify-content:center; border-radius:999px; padding:8px; border:6px solid var(--primary); width:320px; height:320px}
+    .avatar-svg{width:100%; height:100%; border-radius:999px; display:block}
+
+    /* particles layer */
+    #particles{position:absolute; inset:0; z-index:0; pointer-events:none}
+
+    /* ========= SECTIONS ========= */
+    section {padding:72px 0}
+    .section-title{font-size:1.8rem; text-align:center; color:var(--primary); margin-bottom:22px; font-weight:800}
+
+    /* cards grid */
+    .grid{display:grid; gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+    .card{background:var(--card); border-radius:12px; padding:18px; box-shadow:var(--shadow); transition:transform .28s var(--ease), box-shadow .28s var(--ease)}
+    .card:hover{transform:translateY(-8px)}
+
+    .project-image{height:160px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#0f172a,#1e293b); color:white; margin-bottom:12px}
+    .project-title{font-weight:700; margin-bottom:6px}
+    .project-desc{color:var(--muted); font-size:0.95rem; margin-bottom:10px}
+
+    .tech-tags{display:flex; flex-wrap:wrap; gap:8px}
+    .tag{background:linear-gradient(90deg,var(--primary),var(--accent)); color:white; padding:6px 10px; border-radius:999px; font-weight:700; font-size:0.8rem}
+
+    /* education layout */
+    .edu-row{display:flex; gap:14px; align-items:center}
+    .edu-logo{width:68px; height:68px; object-fit:contain; border-radius:10px; background:var(--glass); display:flex; align-items:center; justify-content:center; padding:8px}
+    .edu-meta{font-weight:700}
+    .edu-sub{color:var(--muted)}
+
+    /* certs */
+    .cert-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px}
+    .cert-card{display:flex; gap:12px; align-items:center; padding:12px; border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
+    .cert-card img{width:56px; height:56px; object-fit:contain; border-radius:8px}
+
+    /* timeline (experience) */
+    .timeline {position:relative; padding-left:18px; border-left:3px dashed rgba(0,0,0,0.06)}
+    .timeline .item{margin-bottom:20px; padding-left:14px}
+    .timeline .item h4{margin-bottom:6px}
+    .timeline .item .date{font-weight:700; color:var(--primary); font-size:0.95rem}
+
+    /* patents / pubs */
+    .meta-small{font-size:0.95rem; color:var(--muted)}
+
+    /* contact */
+    .contact-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+    .contact-card{padding:18px; border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
+    .social-icons{display:flex; gap:12px; align-items:center}
+
+    /* resume printable area */
+    #resume-canvas{display:block; width:100%; max-width:900px; margin:18px auto; padding:16px; border-radius:10px; background:var(--card); box-shadow:var(--shadow)}
+
+    /* responsive */
+    @media (max-width:1024px){
+      .hero-inner{grid-template-columns:1fr 360px}
+    }
+    @media (max-width:880px){
+      .hero-inner{grid-template-columns:1fr}
+      .avatar-wrap{width:260px;height:260px}
+      .grid.cols-3{grid-template-columns:repeat(2,1fr)}
+      .contact-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:480px){
+      .grid.cols-3{grid-template-columns:1fr}
+      nav{padding:8px}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+    .mb-8{margin-bottom:20px}
+    .mt-8{margin-top:20px}
+    .flex{display:flex}
+    .gap-8{gap:8px}
+    .pill{padding:6px 10px;border-radius:999px;background:var(--glass);font-weight:700}
+    .download-btn{background:linear-gradient(90deg,var(--primary),var(--accent));color:white;padding:10px 16px;border-radius:10px;border:0;font-weight:800;cursor:pointer}
+    .small{font-size:0.9rem}
+  </style>
+
+  <!-- ======= Inline deploy/readme (visible) ======= -->
+  <!--
+    DEPLOY INSTRUCTIONS (short)
+    1) Initialize a git repo:
+       git init
+       git add index.html
+       git commit -m "Initial portfolio"
+    2) GitHub Pages:
+       - Create a GitHub repo (eg: sourish-portfolio)
+       - Push local branch to GitHub
+       - On repo -> Settings -> Pages -> deploy from main branch / root folder
+    3) Vercel / Netlify:
+       - Connect your GitHub repo to Vercel/Netlify and deploy. Netlify auto-detects static sites.
+    4) Custom Domain:
+       - Add DNS A/CNAME records as provider instructs; enforce HTTPS in hosting panel.
+  -->
+
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">Sourish Dey</div>
+      <div class="nav-links" id="navLinks">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#patents">Patents</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <button class="btn-small" id="downloadResumeTop" title="Download Resume as PDF"><i class="fas fa-download"></i> Resume</button>
+        <button id="themeToggle" class="hamburger" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+        <button id="hamb" class="hamburger" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="hero" class="hero">
+    <div id="particles" aria-hidden="true"></div>
+    <div class="container hero-inner" style="z-index:2">
+      <div>
+        <h1 class="hero-title">Hi — I'm <span style="color:var(--text)">Sourish Dey</span></h1>
+        <div class="typewriter" id="typewriter">Cloud Engineer • Data Scientist • MLOps</div>
+        <p class="hero-p">
+          I build reliable cloud infrastructure, production ML pipelines and delightful data products.
+          Currently pursuing B.Tech (Computer Engineering) at KIIT. Open to internships & collaborations.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#contact" class="btn-small"><i class="fas fa-paper-plane"></i> Get in touch</a>
+          <button id="downloadResume" class="download-btn"><i class="fas fa-file-pdf"></i> Download CV</button>
+          <a href="https://github.com/sourishdey2005" target="_blank" class="pill small">GitHub</a>
+          <a href="https://linkedin.com/in/sourish-dey-20b170206" target="_blank" class="pill small">LinkedIn</a>
+        </div>
+
+        <div class="mt-8">
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <div class="pill small">AWS</div>
+            <div class="pill small">GCP</div>
+            <div class="pill small">Kubernetes</div>
+            <div class="pill small">MLOps</div>
+            <div class="pill small">UiPath</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-card center" aria-hidden="false">
+        <div class="avatar-wrap" role="img" aria-label="Sourish Dey logo">
+          <!-- simple SVG avatar -->
+          <svg class="avatar-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SD">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+            </defs>
+            <rect rx="40" x="0" y="0" width="200" height="200" fill="url(#g1)"></rect>
+            <text x="100" y="120" fill="white" font-family="Arial" font-size="70" text-anchor="middle" font-weight="700">SD</text>
+          </svg>
+        </div>
+        <div class="mt-8 small muted">B.Tech (CSE) • KIIT '27</div>
+        <div class="mt-8">
+          <div class="small muted">Location</div>
+          <div style="font-weight:800">Bhubaneswar, Odisha</div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About</h2>
+      <div class="grid cols-3" style="grid-template-columns:1fr 1fr; gap:22px; align-items:start">
+        <div class="card">
+          <h3 style="margin-bottom:6px">Who I am</h3>
+          <p class="muted">Cloud & Data Science Engineer focused on building production-ready ML and automation systems. I enjoy combining software engineering, data, and cloud to deliver reliable systems at scale.</p>
+
+          <div class="mt-8">
+            <h4 style="margin-bottom:8px">Highlights</h4>
+            <ul class="muted small" style="list-style:disc;margin-left:18px">
+              <li>3+ years building infra, ML pipelines, and automation</li>
+              <li>Experienced with AWS, GCP, Terraform, Kubernetes</li>
+              <li>Published research & filed patents in AI/IoT domains</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom:6px">Quick Stats</h3>
+          <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+            <div style="min-width:120px">
+              <div style="font-size:1.4rem;font-weight:800;color:var(--primary)">15+</div>
+              <div class="muted small">Projects</div>
+            </div>
+            <div style="min-width:120px">
+              <div style="font-size:1.4rem;font-weight:800;color:var(--primary)">100+</div>
+              <div class="muted small">Certificates</div>
+            </div>
+            <div style="min-width:120px">
+              <div style="font-size:1.4rem;font-weight:800;color:var(--primary)">2</div>
+              <div class="muted small">Patents</div>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <h4 style="margin-bottom:8px">Toolbox</h4>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <span class="tag">Python</span>
+              <span class="tag">AWS</span>
+              <span class="tag">Terraform</span>
+              <span class="tag">K8s</span>
+              <span class="tag">UiPath</span>
+              <span class="tag">OpenCV</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" aria-labelledby="education-title">
+    <div class="container">
+      <h2 id="education-title" class="section-title">Education</h2>
+
+      <div class="grid" style="grid-template-columns:1fr; gap:12px">
+        <!-- KIIT -->
+        <div class="card edu-row" data-edu="kiit">
+          <div class="edu-logo" aria-hidden="true">
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/5d/KIIT_University_logo.png" alt="KIIT logo" style="width:100%;height:100%;object-fit:contain">
+          </div>
+          <div>
+            <div class="edu-meta">KIIT - Kalinga Institute of Industrial Technology</div>
+            <div class="edu-sub">Bachelor of Technology - BTech, Computer Engineering</div>
+            <div class="muted small">Jul 2023 – Dec 2027</div>
+          </div>
+        </div>
+
+        <!-- Hem Sheela / 12th -->
+        <div class="card edu-row">
+          <div class="edu-logo" aria-hidden="true">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/CBSE_Logo.svg" alt="Hem Sheela Model School logo" style="width:68px;height:68px">
+          </div>
+          <div>
+            <div class="edu-meta">Hem Sheela Model School — Senior School</div>
+            <div class="edu-sub">12th grade — AISSCE (Science) — Grade: O</div>
+          </div>
+        </div>
+
+        <!-- Hem Sheela / 10th -->
+        <div class="card edu-row">
+          <div class="edu-logo" aria-hidden="true">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/CBSE_Logo.svg" alt="CBSE logo">
+          </div>
+          <div>
+            <div class="edu-meta">Hem Sheela Model School — Secondary School</div>
+            <div class="edu-sub">10th grade — AISSE (Science) — Grade: 98.5%</div>
+          </div>
+        </div>
+
+        <!-- Eastern Railway Primary -->
+        <div class="card edu-row">
+          <div class="edu-logo" aria-hidden="true">
+            <div style="width:68px;height:68px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--glass);font-weight:800;color:var(--primary)">ER</div>
+          </div>
+          <div>
+            <div class="edu-meta">Eastern Railway High School, Andal</div>
+            <div class="edu-sub">Primary Education (Classes 1–3)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+
+      <div class="grid cols-3">
+        <!-- project 1 -->
+        <div class="card">
+          <div class="project-image">
+            <div style="text-align:center">
+              <svg width="90" height="80" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="12" rx="10" width="84" height="56" fill="#10b981"/>
+                <path d="M22 44 L36 56 L76 20" stroke="white" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="project-title">ICICI vs SBI — NIFTY Stock Analysis (2011–2021)</div>
+          <div class="project-desc">Decade-long comparison using financial metrics, ESG scores and trading strategies. Jupyter + Python + Econometrics.</div>
+          <div class="mt-8">
+            <div class="tech-tags"><span class="tag">Python</span><span class="tag">Time Series</span><span class="tag">Plotly</span></div>
+          </div>
+          <div class="mt-8" style="display:flex;gap:10px;justify-content:flex-end">
+            <a class="pill small" href="https://github.com/sourishdey2005/SBI_ICICI_Stocks-" target="_blank"><i class="fab fa-github"></i> Repo</a>
+          </div>
+        </div>
+
+        <!-- project 2 -->
+        <div class="card">
+          <div class="project-image"><i class="fab fa-youtube" style="font-size:48px;color:white"></i></div>
+          <div class="project-title">YouTube Trending Video Analytics</div>
+          <div class="project-desc">Global trending patterns: time-to-trend, engagement ratios and category analysis using web scraping, Plotly dashboards.</div>
+          <div class="mt-8">
+            <div class="tech-tags"><span class="tag">Scraping</span><span class="tag">Plotly</span><span class="tag">Pandas</span></div>
+          </div>
+          <div class="mt-8" style="display:flex;justify-content:flex-end"><a class="pill small" href="https://github.com/sourishdey2005/YT_Analysis" target="_blank"><i class="fab fa-github"></i> Repo</a></div>
+        </div>
+
+        <!-- project 3 -->
+        <div class="card">
+          <div class="project-image"><i class="fas fa-flag-checkered" style="font-size:44px;color:white"></i></div>
+          <div class="project-title">F1 Historical Data Analysis (1950–2023)</div>
+          <div class="project-desc">Interactive EDA of 70+ years of F1 — driver & constructor trends, visualization-heavy exploration.</div>
+          <div class="mt-8"><div class="tech-tags"><span class="tag">Python</span><span class="tag">Plotly</span><span class="tag">EDA</span></div></div>
+          <div class="mt-8" style="display:flex;justify-content:flex-end"><a class="pill small" href="https://github.com/sourishdey2005/F1_Race_Analysis" target="_blank"><i class="fab fa-github"></i> Repo</a></div>
+        </div>
+
+        <!-- project 4 -->
+        <div class="card">
+          <div class="project-image"><i class="fas fa-cloud" style="font-size:44px;color:white"></i></div>
+          <div class="project-title">UiPath — AWS S3 Automation</div>
+          <div class="project-desc">Automated S3 bucket management with UiPath + AWS SDK automation and error handling workflows.</div>
+          <div class="mt-8"><div class="tech-tags"><span class="tag">UiPath</span><span class="tag">AWS</span><span class="tag">RPA</span></div></div>
+          <div class="mt-8" style="display:flex;justify-content:flex-end"><a class="pill small" href="https://github.com/sourishdey2005/Automated-S3-Bucket-Management-Using-UiPath-for-AWS" target="_blank"><i class="fab fa-github"></i> Repo</a></div>
+        </div>
+
+        <!-- project 5 -->
+        <div class="card">
+          <div class="project-image"><i class="fas fa-taxi" style="font-size:44px;color:white"></i></div>
+          <div class="project-title">Uber Ride Analytics Platform</div>
+          <div class="project-desc">50+ EDAs on 148K+ bookings — pricing models, driver efficiency, churn & revenue optimization.</div>
+          <div class="mt-8"><div class="tech-tags"><span class="tag">ML</span><span class="tag">Stats</span><span class="tag">Dashboards</span></div></div>
+          <div class="mt-8" style="display:flex;justify-content:flex-end"><a class="pill small" href="https://github.com/sourishdey2005/Uber_RIde_Analysis" target="_blank"><i class="fab fa-github"></i> Repo</a></div>
+        </div>
+
+        <!-- project 6 -->
+        <div class="card">
+          <div class="project-image"><i class="fas fa-vials" style="font-size:44px;color:white"></i></div>
+          <div class="project-title">Cervical Cancer Risk Prediction</div>
+          <div class="project-desc">Hybrid ML/DL pipeline for early detection; feature engineering and interpretability workstreams.</div>
+          <div class="mt-8"><div class="tech-tags"><span class="tag">ML</span><span class="tag">DL</span><span class="tag">Healthcare</span></div></div>
+          <div class="mt-8" style="display:flex;justify-content:flex-end"><a class="pill small" href="https://github.com/sourishdey2005/cervical-cancer" target="_blank"><i class="fab fa-github"></i> Repo</a></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="container">
+      <h2 class="section-title">Certifications & Courses</h2>
+
+      <div class="cert-grid">
+        <!-- I will include the most representative ones; add more as needed -->
+        <div class="cert-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Linux_Foundation_logo.png" alt="Linux Foundation">
+          <div>
+            <div style="font-weight:800">LFS179: Introduction to Nephio</div>
+            <div class="small muted">The Linux Foundation · Issued Nov 2025</div>
+            <div class="muted small">Skills: Nephio, Networking</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Udemy_logo.svg" alt="Udemy">
+          <div>
+            <div style="font-weight:800">Big Data Engineering Bootcamp (GCP & Azure)</div>
+            <div class="small muted">Udemy · Issued Oct 2025</div>
+            <div class="muted small">Skills: Hadoop, MapR, Big Data</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/FreeCodeCamp_logo.svg" alt="freeCodeCamp">
+          <div>
+            <div style="font-weight:800">Data Visualization</div>
+            <div class="small muted">freeCodeCamp · Issued Oct 2025 — ID: sourishdey-dv</div>
+            <div class="muted small">Badge available on request</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM">
+          <div>
+            <div style="font-weight:800">Accelerating Deep Learning with GPUs</div>
+            <div class="small muted">Cognitive Class · Sep 2025</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Microsoft_logo.svg" alt="Microsoft">
+          <div>
+            <div style="font-weight:800">Career Essentials in Data Analysis</div>
+            <div class="small muted">Microsoft & LinkedIn · Sep 2025</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/AWS_Logo.svg" alt="AWS">
+          <div>
+            <div style="font-weight:800">AWS Educate — Machine Learning Foundations</div>
+            <div class="small muted">Amazon Web Services · Jun 2025</div>
+          </div>
+        </div>
+
+        <!-- Add more certs... -->
+      </div>
+
+      <div class="center mt-8">
+        <a href="#certifications" class="pill small">View Full Certificates (LinkedIn)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATENTS -->
+  <section id="patents">
+    <div class="container">
+      <h2 class="section-title">Patents</h2>
+
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+        <div class="card">
+          <h3>AI-POWERED SMART AGRICULTURE DRONE</h3>
+          <div class="muted small">Patent No: 468494-001 · Issued Oct 16, 2025</div>
+          <p class="mt-8 muted">An autonomous agriculture drone using onboard AI for crop health monitoring, variable-rate spraying, and edge analytics to optimize yields.</p>
+        </div>
+
+        <div class="card">
+          <h3>UNDERWATER POWER GENERATOR</h3>
+          <div class="muted small">Patent No: 450888-001</div>
+          <p class="mt-8 muted">A modular underwater energy-harvesting device leveraging flow-differential turbines for coastal deployment and microgrid applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="container">
+      <h2 class="section-title">Publications</h2>
+
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+        <div class="card">
+          <h3>IoT & Computer Vision for Urban Traffic Management</h3>
+          <div class="muted small">IJFMR · Feb 11, 2025</div>
+          <p class="mt-8 muted">Edge-cloud traffic management using YOLOv8, LIDAR and adaptive signal control. (See full text in publications folder)</p>
+        </div>
+
+        <div class="card">
+          <h3>Smart Breathe — IoT Air Purification System</h3>
+          <div class="muted small">IJFMR · Dec 18, 2024</div>
+          <p class="mt-8 muted">Distributed air quality monitoring with adaptive purification; focuses on fairness and energy efficiency.</p>
+        </div>
+
+        <div class="card">
+          <h3>Quantum Computing for Nuclear Fusion</h3>
+          <div class="muted small">IJFMR · Dec 10, 2024</div>
+          <p class="mt-8 muted">Quantum algorithms to improve fusion simulation accuracy and optimisation workflows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE (timeline) -->
+  <section id="experience">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <div class="card timeline">
+        <div class="item">
+          <div class="date">Oct 2025 – Present</div>
+          <h4>Data Science Intern — Uptricks Services Pvt. Ltd.</h4>
+          <div class="muted small">Built predictive models on 50k+ rows — improved decision accuracy by ~25%</div>
+        </div>
+        <div class="item">
+          <div class="date">Sep 2025 – Present</div>
+          <h4>Data Analyst Intern — Overload Ware Labs AI</h4>
+          <div class="muted small">EDA on 100k+ records, created automated reporting pipelines</div>
+        </div>
+        <div class="item">
+          <div class="date">Apr 2025 – Present</div>
+          <h4>Research Intern — IISER Thiruvananthapuram</h4>
+          <div class="muted small">Federated learning for IoT; published research</div>
+        </div>
+        <div class="item">
+          <div class="date">Jan 2025 – Mar 2025</div>
+          <h4>Zero Trust Cloud Security Intern — Zscaler (Remote)</h4>
+          <div class="muted small">Implemented IAM policies & SIEM workflows</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact & Connect</h2>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Get in touch</h3>
+          <p class="muted">For internships, collaborations, or open-source contributions</p>
+          <div class="mt-8">
+            <div style="font-weight:800">📍 Bhubaneswar, Odisha</div>
+            <div class="muted small">📞 +91-9064648823</div>
+            <div class="muted small">✉️ sourish713321@gmail.com</div>
+          </div>
+
+          <div class="mt-8 social-icons">
+            <a class="pill small" href="https://linkedin.com/in/sourish-dey-20b170206" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a class="pill small" href="https://github.com/sourishdey2005" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <a class="pill small" href="https://linktr.ee/Sourishdey" target="_blank"><i class="fas fa-link"></i> Linktree</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Showcase</h3>
+          <p class="muted">Latest public repositories</p>
+          <div id="githubList" class="mt-8 small muted">Loading public repos...</div>
+
+          <div class="mt-8">
+            <button id="contactEmail" class="download-btn" onclick="window.location='mailto:sourish713321@gmail.com'"><i class="fas fa-envelope"></i> Email Me</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resume area for PDF generation -->
+      <div id="resume-canvas" aria-hidden="false" style="margin-top:28px">
+        <h2 style="margin-bottom:6px">Resume</h2>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:12px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--primary)">SD</div>
+          <div>
+            <div style="font-weight:800;font-size:1.05rem">Sourish Dey</div>
+            <div class="muted small">Cloud & Data Science Engineer — sourish713321@gmail.com • +91-9064648823</div>
+          </div>
+        </div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px dashed rgba(0,0,0,0.06)">
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <h4 style="margin-bottom:6px">Education</h4>
+            <div class="muted small">KIIT — B.Tech, Computer Engineering (Jul 2023 – Dec 2027)</div>
+            <div class="muted small mt-8">Hem Sheela Model School — 12th / 10th</div>
+          </div>
+          <div>
+            <h4 style="margin-bottom:6px">Skills</h4>
+            <div class="muted small">Python, TensorFlow, AWS, GCP, Terraform, Kubernetes, Docker, UiPath, OpenCV</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <h4 style="margin-bottom:6px">Selected Projects</h4>
+          <ul class="muted small" style="margin-left:18px">
+            <li>ICICI vs SBI Stock Analysis — Time-series & econometrics</li>
+            <li>F1 Historical Data Analysis — 70+ years EDA</li>
+            <li>UiPath AWS S3 Automation — RPA workflows for cloud ops</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="center mt-8">
+        <small class="muted">Tip: Use the "Download CV" button to save this resume.</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding:30px 0;margin-top:20px">
+    <div class="container center muted">
+      © <span id="year"></span> Sourish Dey · Built with ❤️ · <span class="muted">KIIT University </span>
+    </div>
+  </footer>
+
+  <!-- ======= SCRIPTS ======= -->
+  <!-- html2canvas + jsPDF via CDN for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="" crossorigin="anonymous"></script>
+
+  <script>
+    // ===================== Utilities & DOM references =====================
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    const hamb = document.getElementById('hamb');
+    const navLinks = document.getElementById('navLinks');
+    const yearSpan = document.getElementById('year');
+    yearSpan.textContent = new Date().getFullYear();
+
+    // ===================== Theme persistence =====================
+    (function initTheme(){
+      const saved = localStorage.getItem('sourish_theme');
+      if(saved) body.setAttribute('data-theme', saved);
+      const icon = themeToggle.querySelector('i');
+      icon.className = body.getAttribute('data-theme') === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    })();
+
+    themeToggle.addEventListener('click', () => {
+      const current = body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', next);
+      localStorage.setItem('sourish_theme', next);
+      const icon = themeToggle.querySelector('i');
+      icon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+
+    // ===================== Mobile nav =====================
+    hamb.addEventListener('click', () => {
+      const isOpen = navLinks.style.display === 'flex';
+      if(isOpen){ navLinks.style.display = ''; } else { navLinks.style.display = 'flex'; }
+    });
+
+    // auto close nav on link click (mobile)
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if(window.innerWidth < 880) navLinks.style.display = ''; }));
+
+    // ===================== Typewriter effect =====================
+    const typeEl = document.getElementById('typewriter');
+    const phrases = ["Cloud Engineer", "Data Scientist", "MLOps Specialist", "AI/ML Developer", "RPA Engineer"];
+    let pIndex = 0, cIndex = 0, deleting = false;
+    function tick() {
+      const current = phrases[pIndex];
+      if(!deleting) {
+        cIndex++;
+        typeEl.textContent = current.slice(0, cIndex);
+        if(cIndex === current.length){ deleting = true; setTimeout(tick, 1600); return; }
+      } else {
+        cIndex--;
+        typeEl.textContent = current.slice(0, cIndex);
+        if(cIndex === 0){ deleting = false; pIndex = (pIndex+1) % phrases.length; }
+      }
+      setTimeout(tick, deleting ? 40 : 80);
+    }
+    tick();
+
+    // ===================== Skill-bar animation (intersection) =====================
+    const skillBars = document.querySelectorAll('.skill-progress');
+    if(skillBars && 'IntersectionObserver' in window){
+      const sbObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            const bar = e.target;
+            const width = bar.getAttribute('data-w') || bar.style.width || '80%';
+            bar.style.width = '0%';
+            setTimeout(()=> bar.style.width = width, 50);
+            sbObserver.unobserve(bar);
+          }
+        });
+      }, {threshold: 0.35});
+      skillBars.forEach(b => sbObserver.observe(b));
+    }
+
+    // ===================== Particles background (lightweight) =====================
+    const particlesLayer = document.getElementById('particles');
+    function spawnParticle(){
+      const p = document.createElement('div');
+      const size = Math.random()*6 + 2;
+      p.style.position = 'absolute';
+      p.style.left = (Math.random()*100) + 'vw';
+      p.style.top = '-20px';
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      p.style.borderRadius = '50%';
+      p.style.opacity = (Math.random()*0.5)+0.2;
+      p.style.background = 'linear-gradient(90deg, rgba(99,102,241,0.9), rgba(16,185,129,0.9))';
+      p.style.transform = `translateY(0) rotate(0deg)`;
+      p.style.transition = 'transform 6s linear, opacity 2s linear';
+      particlesLayer.appendChild(p);
+      // animate
+      requestAnimationFrame(()=>{
+        p.style.transform = `translateY(${window.innerHeight + 120}px) rotate(${Math.random()*720}deg)`;
+        p.style.opacity = '0';
+      });
+      setTimeout(()=> p.remove(), 7000);
+    }
+    // throttle spawn
+    let spawnInterval = setInterval(spawnParticle, 350);
+
+    // ===================== Scroll animation (simple intersection) =====================
+    const anims = document.querySelectorAll('.card, .project-image, .timeline .item, .cert-card');
+    if('IntersectionObserver' in window){
+      const animObs = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if(en.isIntersecting){ en.target.style.transform = 'translateY(0)'; en.target.style.opacity = 1; animObs.unobserve(en.target); }
+        });
+      }, {threshold: 0.15});
+      anims.forEach(a => { a.style.opacity = 0; a.style.transform = 'translateY(30px)'; animObs.observe(a); });
+    } else { anims.forEach(a => a.style.opacity = 1); }
+
+    // ===================== GitHub public repos fetch (runtime) =====================
+    async function fetchGitHubRepos(username='sourishdey2005', limit=6){
+      const container = document.getElementById('githubList');
+      try{
+        const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=${limit}`);
+        if(!res.ok) throw new Error('GitHub API error');
+        const data = await res.json();
+        if(!Array.isArray(data) || data.length === 0){ container.textContent = 'No public repos found.'; return; }
+        const ul = document.createElement('ul'); ul.style.listStyle='none'; ul.style.padding='0';
+        data.forEach(repo => {
+          const li = document.createElement('li');
+          li.style.marginBottom='8px';
+          li.innerHTML = `<a href="${repo.html_url}" target="_blank" class="small">${repo.name}</a> · <span class="muted small">${repo.language||'—'}</span> · <span class="muted small">★ ${repo.stargazers_count}</span>`;
+          ul.appendChild(li);
+        });
+        container.innerHTML=''; container.appendChild(ul);
+      } catch(err){
+        container.textContent = 'Failed to load GitHub repos (rate limit or network).';
+        console.warn(err);
+      }
+    }
+    // call fetch (non-blocking)
+    fetchGitHubRepos();
+
+    // ===================== PDF (Resume) Generation using html2canvas + jsPDF =====================
+    const { jsPDF } = window.jspdf;
+    async function generatePDF(){
+      const el = document.getElementById('resume-canvas');
+      if(!el) return alert('Resume area missing');
+      // scale for crisp PDF
+      const originalScale = 2;
+      const canvas = await html2canvas(el, { scale: originalScale, useCORS: true, backgroundColor: getComputedStyle(document.body).getPropertyValue('background-color') });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({ orientation: 'portrait', unit:'pt', format: 'a4' });
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      // Calculate image size while preserving aspect ratio to fit page width with margin
+      const margin = 36;
+      const imgWidth = pageWidth - margin*2;
+      const ratio = canvas.width / canvas.height;
+      const imgHeight = imgWidth / ratio;
+      pdf.addImage(imgData, 'PNG', margin, margin, imgWidth, imgHeight);
+      pdf.setProperties({ title: "Resume - Sourish Dey" });
+      pdf.save('Sourish_Dey_Resume.pdf');
+    }
+
+    // Attach download buttons
+    document.getElementById('downloadResume')?.addEventListener('click', async () => {
+      document.getElementById('downloadResume').disabled = true;
+      document.getElementById('downloadResume').textContent = 'Generating...';
+      try{ await generatePDF(); } catch(e){ alert('Error generating PDF'); console.error(e); }
+      document.getElementById('downloadResume').disabled = false;
+      document.getElementById('downloadResume').innerHTML = '<i class="fas fa-file-pdf"></i> Download CV';
+    });
+    document.getElementById('downloadResumeTop')?.addEventListener('click', () => { document.getElementById('downloadResume').click(); });
+
+    // ===================== Smooth scroll for anchors =====================
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const href = this.getAttribute('href');
+        if(href === '#' || href === '') return;
+        const el = document.querySelector(href);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+
+    // ===================== Accessibility: reduce motion user preference =====================
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if(mq.matches){
+      // disable particle interval
+      clearInterval(spawnInterval);
+      document.querySelectorAll('*').forEach(el => el.style.transition = 'none');
+    }
+
+    // done
+    console.log('Portfolio ready — client scripts loaded');
+  </script>
+
+  <!-- End body -->
+</body>
+</html>
